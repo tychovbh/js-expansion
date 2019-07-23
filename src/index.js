@@ -37,6 +37,12 @@ Array.prototype.clone = function() {
     return this.slice(0)
 }
 
+Array.prototype.sortBy = function (field, direction) {
+    return this.sort(function (a, b) {
+        return direction === 'desc' ? b[field] - a[field] : a[field] - b[field]
+    })
+}
+
 Array.prototype.save = function(object, key = 'id') {
     let update = false
     let collection = this

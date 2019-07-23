@@ -42,6 +42,11 @@ const foundElement = collection.findBy('name', 'henry')
 // Search object index in array on key => value
 const indexElement = collection.findIndexBy('name', 'henry')
 
+// Sort array by object key (direction desc)
+const sortedCollection = collection.sortBy('id', 'desc')
+// default direction asc
+const sortedCollection = collection.sortBy('id') 
+
 // Delete element from arrat
 const deleteCollection = collection.delete('id', 2)
 

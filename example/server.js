@@ -19,7 +19,9 @@ app.get('/', (req, res) => {
     assert.deepStrictEqual(collection.first(), collection[0]);
     assert.deepStrictEqual(collection.last(), collection[1]);
     assert.deepStrictEqual(collection.findBy('name', 'henry'), collection[1]);
-    assert.deepStrictEqual(collection.findIndexBy('name', 'henry'), 1);
+    assert.deepStrictEqual(collection.findIndexBy('name', 'henry'), 1)
+    assert.deepStrictEqual(collection.sortBy('id', 'desc'), collection.reverse());
+    assert.deepStrictEqual(collection.sortBy('id', 'asc'), collection);
     assert.deepStrictEqual(collection.delete('id', 2), [
         {
             id: 1,
