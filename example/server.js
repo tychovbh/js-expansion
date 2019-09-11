@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
             ]
         },
     ]
-    
+
     assert.deepStrictEqual(collection.get('1.friends.0.name'), collection[1].friends[0].name);
     assert.deepStrictEqual(collection.first(), collection[0]);
     assert.deepStrictEqual(collection.last(), collection[1]);
