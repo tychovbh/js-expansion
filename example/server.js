@@ -4,6 +4,7 @@ const app = express()
 const port = 3000
 require('js-expansion')
 
+
 app.get('/', (req, res) => {
     const collection = [
         {
@@ -12,10 +13,16 @@ app.get('/', (req, res) => {
         },
         {
             id: 2,
-            name: 'henry'
+            name: 'henry',
+            friends: [
+                {
+                    name: 'Bart'
+                }
+            ]
         },
     ]
-
+    
+    assert.deepStrictEqual(collection.get('1.friends.0.name'), collection[1].friends[0].name);
     assert.deepStrictEqual(collection.first(), collection[0]);
     assert.deepStrictEqual(collection.last(), collection[1]);
     assert.deepStrictEqual(collection.findBy('name', 'henry'), collection[1]);
@@ -46,6 +53,7 @@ app.get('/', (req, res) => {
 
     const seconds = 60
     assert.equal(seconds.time(), '01:00')
+
 
     res.send('Hello World!')
 })
