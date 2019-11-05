@@ -23,6 +23,13 @@ app.get('/', (req, res) => {
     ]
 
     assert.deepStrictEqual(collection.get('1.friends.0.name'), collection[1].friends[0].name);
+    const collection2 = ['admin', 'teacher', 'student']
+
+    assert.deepStrictEqual(collection2.contains(['admin', 'parent']), true)
+    assert.deepStrictEqual(collection2.has(['student', 'teacher']), true)
+    assert.deepStrictEqual(collection2.contains(['parent']), false)
+    assert.deepStrictEqual(collection2.has(['student', 'teacher', 'parent']), false)
+
     assert.deepStrictEqual(collection.first(), collection[0]);
     assert.deepStrictEqual(collection.last(), collection[1]);
     assert.deepStrictEqual(collection.findBy('name', 'henry'), collection[1]);
@@ -55,7 +62,7 @@ app.get('/', (req, res) => {
     assert.equal(seconds.time(), '01:00')
 
 
-    res.send('Hello World!')
+    res.send('All tests passed!')
 })
 
 app.listen(port, () => console.log(`Example app listening on port http://localhost${port}!`))
