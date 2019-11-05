@@ -72,9 +72,9 @@ Array.prototype.save = function (object, key = 'id') {
 }
 
 Array.prototype.delete = function (key, value) {
-    let collection = this.clone()
-    collection.splice(this.findIndexBy(key, value), 1)
-    return collection
+    return this.filter((item) => {
+        return item[key] !== value
+    })
 }
 
 
