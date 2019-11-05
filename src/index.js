@@ -11,6 +11,25 @@ Number.prototype.time = function () {
     return ((h > 0 ? h + ':' : '') + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s)
 }
 
+Array.prototype.contains = function (array) {
+    for (let i in array) {
+        if (array.hasOwnProperty(i) && this.includes(array[i])) {
+            return true
+        }
+    }
+
+    return false
+}
+Array.prototype.has = function (array) {
+    for (let i in array) {
+        if (array.hasOwnProperty(i) && !this.includes(array[i])) {
+            return false
+        }
+    }
+
+    return true
+}
+
 Array.prototype.first = function () {
     return this[0] || {}
 }
