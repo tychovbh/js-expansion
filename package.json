@@ -1,6 +1,6 @@
 {
   "name": "js-expansion",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Expansion of Javascript",
   "main": "src/index.js",
   "repository": "https://github.com/tychovbh/js-expansion",

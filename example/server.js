@@ -9,20 +9,20 @@ app.get('/', (req, res) => {
     const collection = [
         {
             id: 1,
-            name: 'Piet'
+            name: 'Piet',
         },
         {
             id: 2,
             name: 'henry',
             friends: [
                 {
-                    name: 'Bart'
-                }
-            ]
+                    name: 'Bart',
+                },
+            ],
         },
     ]
 
-    assert.deepStrictEqual(collection.get('1.friends.0.name'), collection[1].friends[0].name);
+    assert.deepStrictEqual(collection.get('1.friends.0.name'), collection[1].friends[0].name)
     const collection2 = ['admin', 'teacher', 'student']
 
     assert.deepStrictEqual(collection2.contains(['admin', 'parent']), true)
@@ -30,26 +30,29 @@ app.get('/', (req, res) => {
     assert.deepStrictEqual(collection2.contains(['parent']), false)
     assert.deepStrictEqual(collection2.has(['student', 'teacher', 'parent']), false)
 
-    assert.deepStrictEqual(collection.first(), collection[0]);
-    assert.deepStrictEqual(collection.last(), collection[1]);
-    assert.deepStrictEqual(collection.findBy('name', 'henry'), collection[1]);
+    assert.deepStrictEqual(collection.first(), collection[0])
+    assert.deepStrictEqual(collection.last(), collection[1])
+    assert.deepStrictEqual(collection.findBy('name', 'henry'), collection[1])
     assert.deepStrictEqual(collection.findIndexBy('name', 'henry'), 1)
-    assert.deepStrictEqual(collection.sortBy('id', 'desc'), collection.reverse());
-    assert.deepStrictEqual(collection.sortBy('id', 'asc'), collection);
+    assert.deepStrictEqual(collection.sortBy('id', 'desc'), collection.reverse())
+    assert.deepStrictEqual(collection.sortBy('id', 'asc'), collection)
     assert.deepStrictEqual(collection.delete('id', 2), [
         {
             id: 1,
-            name: 'Piet'
-        }
-    ]);
+            name: 'Piet',
+        },
+    ])
     assert.deepStrictEqual(collection.save({
         id: 3,
-        name: 'klaas'
-    }), collection);
+        name: 'klaas',
+    }), collection)
     assert.deepStrictEqual(collection.save({
         id: 1,
-        name: 'klaas'
-    }), collection);
+        name: 'klaas',
+    }), collection)
+
+    assert.deepStrictEqual([1, 2, 3].save(4), [1, 2, 3, 4])
+    assert.deepStrictEqual(['henry', 'piet', 'klaas'].save('klaas'), ['henry', 'piet', 'klaas'])
 
     const array = ['piet', 'henry']
     assert.equal(array.search('piet'), 'piet')

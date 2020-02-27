@@ -71,20 +71,24 @@ Array.prototype.sortBy = function (field, direction) {
     })
 }
 
-Array.prototype.save = function (object, key = 'id') {
+Array.prototype.save = function (value, key = 'id') {
     let update = false
     let collection = this
 
-    for (let i in collection) {
-        if (object[key] === collection[i][key]) {
-            collection[i] = object
-            update = true
-            break
+    if (typeof value === 'object') {
+        for (let i in collection) {
+            if (value[key] === collection[i][key]) {
+                collection[i] = value
+                update = true
+                break
+            }
         }
+    } else if(collection.includes(value)) {
+        update = true
     }
 
     if (!update) {
-        collection.push(object)
+        collection.push(value)
     }
 
     return collection
