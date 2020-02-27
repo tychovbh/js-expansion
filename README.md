@@ -47,19 +47,20 @@ const sortedCollection = collection.sortBy('id', 'desc')
 // default direction asc
 const sortedCollection = collection.sortBy('id') 
 
-// Delete element from arrat
-const deleteCollection = collection.delete('id', 2)
+// Delete element from array
+const deleteCollection = collection.delete(2)
 
-// Add new element to the Array
+// Delete element from array with objects
+const deleteCollection = collection.delete(2, 'id')
+
+// Add new element to the Array if the value is already present in the collection is does not adds it again.
+const addCollection = collection.save(1)
+
+// Add new element to the Array with objects
 const addCollection = collection.save({
     id: 3,
     name: 'klaas'
 })
-
-OR
-
-// Add new element to the Array if the value is already present in the collection is does not adds it again.
-const addCollection = collection.save(1)
 
 // Update existing element in the array (default updates on key `id`)
 const updateCollection = collection.save({

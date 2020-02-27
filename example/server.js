@@ -36,12 +36,14 @@ app.get('/', (req, res) => {
     assert.deepStrictEqual(collection.findIndexBy('name', 'henry'), 1)
     assert.deepStrictEqual(collection.sortBy('id', 'desc'), collection.reverse())
     assert.deepStrictEqual(collection.sortBy('id', 'asc'), collection)
-    assert.deepStrictEqual(collection.delete('id', 2), [
+    assert.deepStrictEqual(collection.delete(2, 'id'), [
         {
             id: 1,
             name: 'Piet',
         },
     ])
+    assert.deepStrictEqual([1, 2, 3].delete(2), [1, 3])
+    assert.deepStrictEqual([1, 2, 3].save(4), [1, 2, 3, 4])
     assert.deepStrictEqual(collection.save({
         id: 3,
         name: 'klaas',

@@ -94,9 +94,13 @@ Array.prototype.save = function (value, key = 'id') {
     return collection
 }
 
-Array.prototype.delete = function (key, value) {
+Array.prototype.delete = function (value, key = '') {
     return this.filter((item) => {
-        return item[key] !== value
+        if (key !== '') {
+            return item[key] !== value
+        }
+
+        return item !== value
     })
 }
 
