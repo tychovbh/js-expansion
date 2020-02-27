@@ -56,6 +56,11 @@ const addCollection = collection.save({
     name: 'klaas'
 })
 
+OR
+
+// Add new element to the Array if the value is already present in the collection is does not adds it again.
+const addCollection = collection.save(1)
+
 // Update existing element in the array (default updates on key `id`)
 const updateCollection = collection.save({
     id: 1,
@@ -67,6 +72,7 @@ const updateCollection = collection.save({
     name: 'klaas',
     age: 10
 }, 'name')
+
 
 /* Normal Array methods */
 const array = ['piet', 'henry']
