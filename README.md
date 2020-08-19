@@ -26,7 +26,13 @@ const collection = [
     },
     {
         id: 2,
-        name: 'henry'
+        name: 'henry',
+        friends: [
+            {
+                id: 3,
+                name: 'Karel',
+            }   
+        ]
     },
 ]
 
@@ -42,8 +48,12 @@ const foundElement = collection.findBy('name', 'henry')
 // Search object index in array on key => value
 const indexElement = collection.findIndexBy('name', 'henry')
 
+// Get value from array by dot notation: Karel
+const friend_name = collection.get('1.friends.0.name')
+
 // Sort array by object key (direction desc)
 const sortedCollection = collection.sortBy('id', 'desc')
+
 // default direction asc
 const sortedCollection = collection.sortBy('id') 
 
