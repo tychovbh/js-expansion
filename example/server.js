@@ -66,6 +66,10 @@ app.get('/', (req, res) => {
     const seconds = 60
     assert.equal(seconds.time(), '01:00')
 
+    const price = 10.50
+    assert.equal(price.price('EUR'), '€10.50')
+    assert.equal(price.price('EUR', 'nl-NL'), '€ 10,50')
+
 
     res.send('All tests passed!')
 })
