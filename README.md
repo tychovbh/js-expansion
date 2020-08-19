@@ -97,6 +97,7 @@ const seconds = 60
 seconds.time()
 
 const price = 10.50
+
 // Convert number/float price into label: € 10,50
 price.price('EUR', 'nl-NL')
 ```
