@@ -21,6 +21,10 @@ Number.prototype.time = function () {
 }
 
 Number.prototype.price = function (currency = 'USD', locale = 'en-US') {
+    if (typeof Intl !== 'object' || typeof Intl.NumberFormat !== 'function') {
+        return this
+    }
+
     const formatter = new Intl.NumberFormat(locale, {
         style: 'currency',
         currency: currency,
