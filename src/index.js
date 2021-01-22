@@ -20,7 +20,10 @@ Number.prototype.time = function () {
     return ((h > 0 ? h + ':' : '') + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s)
 }
 
-Number.prototype.price = function (currency = 'USD', locale = 'en-US') {
+Number.prototype.price = function (currency, locale) {
+    locale = locale || 'en-US'
+    currency = currency || 'USD'
+
     if (typeof Intl !== 'object' || typeof Intl.NumberFormat !== 'function') {
         return this
     }
@@ -85,7 +88,8 @@ Array.prototype.sortBy = function (field, direction) {
     })
 }
 
-Array.prototype.save = function (value, key = 'id') {
+Array.prototype.save = function (value, key) {
+    key = key || 'id'
     let update = false
     let collection = this
 
@@ -108,7 +112,8 @@ Array.prototype.save = function (value, key = 'id') {
     return collection
 }
 
-Array.prototype.delete = function (value, key = '') {
+Array.prototype.delete = function (value, key) {
+    key = key || ''
     return this.filter((item) => {
         if (key !== '') {
             return item[key] !== value
