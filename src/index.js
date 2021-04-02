@@ -67,7 +67,16 @@ Array.prototype.clone = function () {
 
 Array.prototype.sortBy = function (field, direction) {
     return this.sort(function (a, b) {
-        return direction === 'desc' ? b[field] - a[field] : a[field] - b[field]
+        if (!isNaN(a[field]) && !isNaN(b[field])) {
+            return direction === 'desc' ? b[field] - a[field] : a[field] - b[field]
+        }
+
+
+        if (direction === 'desc') {
+            return a[field] > b[field] ? -1 : 1
+        }
+
+        return a[field] < b[field] ? -1 : 1
     })
 }
 
