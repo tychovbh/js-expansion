@@ -20,6 +20,20 @@ Number.prototype.time = function () {
     return ((h > 0 ? h + ':' : '') + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s)
 }
 
+Number.prototype.price = function (currency = 'USD', locale = 'en-US') {
+    if (typeof Intl !== 'object' || typeof Intl.NumberFormat !== 'function') {
+        return this
+    }
+
+    const formatter = new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currency,
+        minimumFractionDigits: 2
+    })
+
+    return formatter.format(this)
+}
+
 Array.prototype.contains = function (array) {
     for (let i in array) {
         if (array.hasOwnProperty(i) && this.includes(array[i])) {
