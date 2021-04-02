@@ -157,6 +157,36 @@ String.prototype.ucfirst = function () {
     return this.charAt(0).toUpperCase() + this.slice(1)
 }
 
+const createForm = (formData, params, key = null) => {
+    for (let i in params) {
+        if (!params.hasOwnProperty(i)) {
+            continue
+        }
+
+        let formKey = key ? key + `[${i}]` : i
+
+        if (
+            params[i] !== null &&
+            (Array.isArray(params[i]) || typeof params[i] === 'object') &&
+            !(params[i] instanceof File || params[i] instanceof Date)
+        ) {
+            formData = createForm(formData, params[i], formKey)
+            continue
+        }
+
+        // Return null values as empty string, because the back-end will receive a string "null" which is super annoying.
+        formData.append(formKey, params[i] === null ? '' : params[i])
+    }
+
+    return formData
+}
+
+function form(params) {
+    let formData = new FormData()
+    return createForm(formData, params)
+}
+
 module.exports = {
-    get
+    get,
+    form
 };
