@@ -1,3 +1,6 @@
+const FormData = require('form-data')
+const qs = require('qs')
+
 if (typeof HTMLElement !== 'undefined') {
     HTMLElement.prototype.hasClass = function (cls) {
         return this.classList.contains(cls)
@@ -186,7 +189,27 @@ function form(params) {
     return createForm(formData, params)
 }
 
+function query(filters) {
+    return filters && JSON.stringify(filters) !== '{}' ? '?' + qs.stringify(filters) : ''
+}
+
+function request(type, route, params = {}) {
+    params = Object.assign({}, params) || {}
+
+    for (let key in params) {
+        if (!params.hasOwnProperty(key) || route.indexOf(`{${key}}`) === -1) {
+            continue
+        }
+        route = route.replace(`{${key}}`, params[key])
+        delete params[key]
+    }
+
+    return type === 'get' ? route + query(params) : route
+}
+
 module.exports = {
     get,
-    form
+    form,
+    query,
+    request
 };

@@ -3,7 +3,7 @@ let assert = require('assert')
 const app = express()
 const port = 3000
 require('js-expansion')
-
+const {query, form, request} = require('js-expansion')
 
 app.get('/', (req, res) => {
     const collection = [
@@ -59,19 +59,24 @@ app.get('/', (req, res) => {
     assert.deepStrictEqual(['henry', 'piet', 'klaas'].save('klaas'), ['henry', 'piet', 'klaas'])
 
     const array = ['piet', 'henry']
-    assert.equal(array.search('piet'), 'piet')
+    assert.strictEqual(array.search('piet'), 'piet')
     assert.deepStrictEqual(array.clone(), array)
 
     const string = 'piet'
-    assert.equal(string.ucfirst(), 'Piet')
+    assert.strictEqual(string.ucfirst(), 'Piet')
 
     const seconds = 60
-    assert.equal(seconds.time(), '01:00')
+    assert.strictEqual(seconds.time(), '01:00')
 
     const price = 10.50
-    assert.equal(price.price('EUR'), '€10.50')
-    assert.equal(price.price('EUR', 'nl-NL'), '€ 10,50')
+    assert.strictEqual(price.price('EUR'), '€10.50')
+    assert.strictEqual(price.price('EUR', 'nl-NL'), '€ 10,50')
 
+
+    const formData = form({id: 1})
+
+    assert.strictEqual(query({id: 1, name: 'henry'}), '?id=1&name=henry')
+    assert.strictEqual(request('get', '/users/{id}', {id: 1, paginate: 10}), '/users/1?paginate=10')
 
     res.send('All tests passed!')
 })

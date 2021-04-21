@@ -112,6 +112,29 @@ const price = 10.50
 price.price('EUR', 'nl-NL')
 ```
 
+## Helpers
+```jsx
+require('js-expansion')
+const {query, form, request} = require('js-expansion')
+
+// Convert object to FormData (for multipart/form-data)
+const formData = form({
+    title: 'henry',
+    thumbnail: File,
+    permissions: [1, 2, 3]
+})
+
+
+// Create GET params url from object: ?search=piet&paginate=10
+const queryUrl = query({search: 'piet', paginate: 10})
+
+// Create request from params: /users/1?details=true
+// replaces variables from url with params, and adds (only when type is 'get') the remaining params to the query url using the query method.
+// available types: ('get', 'post', 'put', 'delete')
+const requestUrl = request('get', '/users/{id}', {id: 1, details: true})
+```
+
+
 ## Tests
 ```bash
 cd example

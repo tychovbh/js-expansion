@@ -5,5 +5,12 @@
   "main": "src/index.js",
   "repository": "https://github.com/tychovbh/js-expansion",
   "author": "Tycho van Berge Henegouwen <info@bespokeweb.nl>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "publish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags",
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "qs": "^6.10.1"
+  }
 }
