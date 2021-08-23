@@ -204,7 +204,7 @@ function request(type, route, params = {}) {
         delete params[key]
     }
 
-    return type === 'get' ? route + query(params) : route
+    return ['get', 'delete'].includes(type) ? route + query(params) : route
 }
 
 module.exports = {
