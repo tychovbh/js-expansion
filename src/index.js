@@ -1,5 +1,6 @@
 const FormData = require('form-data')
 const qs = require('qs')
+const Cookies = require('js-cookie')
 
 if (typeof HTMLElement !== 'undefined') {
     HTMLElement.prototype.hasClass = function (cls) {
@@ -31,7 +32,7 @@ Number.prototype.price = function (currency = 'USD', locale = 'en-US') {
     const formatter = new Intl.NumberFormat(locale, {
         style: 'currency',
         currency: currency,
-        minimumFractionDigits: 2
+        minimumFractionDigits: 2,
     })
 
     return formatter.format(this)
@@ -109,7 +110,7 @@ Array.prototype.save = function (value, key = 'id') {
                 break
             }
         }
-    } else if(collection.includes(value)) {
+    } else if (collection.includes(value)) {
         update = true
     }
 
@@ -207,9 +208,56 @@ function request(type, route, params = {}) {
     return ['get', 'delete'].includes(type) ? route + query(params) : route
 }
 
+class Cookie {
+    write(key, value, options = {}) {
+        if (this.res) {
+            this.res.cookie(key, value, options)
+            return this
+        }
+
+        Cookies.set(key, value, options)
+        return this
+    }
+
+    read(key) {
+        return this.req ? this.req.cookies[key] : Cookies.get(key)
+    }
+
+    clear(key) {
+        this.res ? this.res.clearCookie(key) : Cookies.remove(key)
+        return this
+    }
+
+    withExpress(req, res) {
+        this.req = req
+        this.res = res
+
+        return this
+    }
+}
+
+class CookieFactory {
+    static withExpress(req, res) {
+        return new Cookie().withExpress(req, res)
+    }
+
+    static write(key, value) {
+        return new Cookie().write(key, value)
+    }
+
+    static read(key) {
+        return new Cookie().read(key)
+    }
+
+    static clear(key) {
+        return new Cookie().clear(key)
+    }
+}
+
 module.exports = {
     get,
     form,
     query,
-    request
-};
+    request,
+    Cookies: CookieFactory
+}
