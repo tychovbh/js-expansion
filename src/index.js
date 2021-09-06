@@ -152,7 +152,6 @@ function get(data, key) {
     return get(data, key)
 }
 
-
 Array.prototype.get = function (key) {
     return get(this, key)
 }
@@ -241,8 +240,8 @@ class CookieFactory {
         return new Cookie().withExpress(req, res)
     }
 
-    static write(key, value) {
-        return new Cookie().write(key, value)
+    static write(key, value, options) {
+        return new Cookie().write(key, value, options)
     }
 
     static read(key) {
