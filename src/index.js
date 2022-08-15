@@ -170,7 +170,8 @@ const createForm = (formData, params, key = null) => {
 
         if (
             params[i] !== null &&
-            (Array.isArray(params[i]) || typeof params[i] === 'object') &&
+            (Array.isArray(params[i]) && params[i].length > 0) &&
+            typeof params[i] === 'object' &&
             !(params[i] instanceof File || params[i] instanceof Date)
         ) {
             formData = createForm(formData, params[i], formKey)
